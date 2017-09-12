@@ -1,28 +1,72 @@
+int diceSize = 20;
+int numDice = 1;
+int[] totals = new int[10000];
+int sumTotals = 0;
 void setup()
 {
-	noLoop();
+  noLoop();
+  size(1200, 1000);
 }
 void draw()
 {
-	//your code here
+  background(200);
+  int total = 0;
+  for (int x = diceSize;x<=1000-diceSize;x+=diceSize){
+  	for (int y = diceSize; y<=1000-diceSize;y+=diceSize){
+  		Die d = new Die(x,y);
+  		d.roll();
+  		d.show();
+  		total += d.getNum();
+  	}
+  }
+  totals[total-1]++;
+  sumTotals ++;
+  for (int i = 0; i<2500;i++){
+  	rectMode(CORNER);
+  	if (i%100==0){
+  		text(i, 1000, 100+i/2);
+  	}
+  	if (totals[i]!=0)System.out.println((int)(((double)totals[i]/(double)sumTotals)*100));
+  	rect(1000, 100+i/2, (int)(((double)totals[i]/(double)sumTotals)*100), 1);
+  }
 }
 void mousePressed()
 {
-	redraw();
+  redraw();
 }
 class Die //models one single dice cube
 {
-	//variable declarations here
-	Die(int x, int y) //constructor
-	{
-		//variable initializations here
-	}
-	void roll()
-	{
-		//your code here
-	}
-	void show()
-	{
-		//your code here
-	}
+  int x, y, num = (int)(Math.random()*6)+1;
+  Die(int x1, int y1) //constructor
+  {
+    x=x1;
+    y=y1;
+  }
+  void roll()
+  {
+    num = (int)(Math.random()*6)+1;
+  }
+  void show()
+  {
+    fill(#FFF2D1);
+    rectMode(CENTER);
+    rect(x, y, diceSize, diceSize);
+    if (num == 1 || num == 3 || num == 5)
+      ellipse(x, y, diceSize/5, diceSize/5); 
+    if (num == 2 || num == 3 || num == 4 || num == 5 || num == 6) { 
+      ellipse(x - diceSize/4, y - diceSize/4, diceSize/5, diceSize/5);
+      ellipse(x + diceSize/4, y + diceSize/4, diceSize/5, diceSize/5);
+    }
+    if (num == 4 || num == 5 || num == 6) {
+      ellipse(x - diceSize/4, y + diceSize/4, diceSize/5, diceSize/5);
+      ellipse(x + diceSize/4, y - diceSize/4, diceSize/5, diceSize/5);
+    }
+    if (num == 6) {
+      ellipse(x, y - diceSize/4, diceSize/5, diceSize/5);
+      ellipse(x, y + diceSize/4, diceSize/5, diceSize/5);
+    }
+  }
+  int getNum(){
+  	return num;
+  }
 }
