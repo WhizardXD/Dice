@@ -19,16 +19,9 @@ void draw()
   		total += d.getNum();
   	}
   }
-  totals[total-1]++;
-  sumTotals ++;
-  for (int i = 0; i<2500;i++){
-  	rectMode(CORNER);
-  	if (i%100==0){
-  		text(i, 1000, 100+i/2);
-  	}
-  	if (totals[i]!=0)System.out.println((int)(((double)totals[i]/(double)sumTotals)*100));
-  	rect(1000, 100+i/2, (int)(((double)totals[i]/(double)sumTotals)*100), 1);
-  }
+  System.out.println(total);
+  fill(255,255,255);
+  text("Total: " + total, 1000, 100);
 }
 void mousePressed()
 {
