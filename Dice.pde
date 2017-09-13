@@ -19,7 +19,7 @@ void draw()
   		total += d.getNum();
   	}
   }
-  System.out.println(total);
+  //System.out.println(total);
   fill(0,0,0);
   text("Total: " + total, 1000, 100);
 }
