@@ -20,7 +20,7 @@ void draw()
   	}
   }
   System.out.println(total);
-  fill(255,255,255);
+  fill(0,0,0);
   text("Total: " + total, 1000, 100);
 }
 void mousePressed()
